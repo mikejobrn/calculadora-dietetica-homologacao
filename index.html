@@ -93,7 +93,7 @@
                 readonly
                 class="form-control-plaintext"
                 id="imc"
-                value="232"
+                value=""
               />
             </div>
             <label for="classificacao" class="col-4 col-form-label">Classificação</label>
@@ -103,7 +103,7 @@
                 readonly
                 class="form-control-plaintext"
                 id="classificacao"
-                value="232"
+                value=""
               />
             </div>
             <label for="risco" class="col-4 col-form-label">Risco</label>
@@ -113,7 +113,7 @@
                 readonly
                 class="form-control-plaintext"
                 id="risco"
-                value="232"
+                value=""
               />
             </div>
           </div>
@@ -143,7 +143,7 @@
         classificacaoDom.value = classificacao
 
         const riscoDom = document.getElementById('risco')
-        riscoDom.value = risco
+        riscoDom.value = risco ?? ''
       });
 
       function getClassificacaoRisco(imc) {
