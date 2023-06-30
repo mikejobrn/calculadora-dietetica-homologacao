@@ -40,6 +40,18 @@
           />
           <span class="input-group-text" id="basic-addon2">m</span>
         </div>
+        <label for="idade" class="form-label">Idade</label>
+        <div class="input-group mb-3">
+          <input
+            id="idade"
+            type="number"
+            class="form-control"
+            placeholder="Idade"
+            aria-label="Idade"
+            aria-describedby="basic-addon2"
+          />
+          <span class="input-group-text" id="basic-addon2">anos</span>
+        </div>
         <label class="form-label">Sexo</label>
         <div>
           <div class="form-check form-check-inline">
@@ -74,14 +86,34 @@
         <fieldset>
           <legend>Resultados</legend>
           <div class="mb-3 row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">IMC</label>
-            <div class="col-sm-10">
+            <label for="staticEmail" class="col-4 col-form-label">IMC</label>
+            <div class="col-8">
               <input
                 type="text"
                 readonly
                 class="form-control-plaintext"
                 id="imc"
-                value=""
+                value="232"
+              />
+            </div>
+            <label for="classificacao" class="col-4 col-form-label">Classificação</label>
+            <div class="col-8">
+              <input
+                type="text"
+                readonly
+                class="form-control-plaintext"
+                id="classificacao"
+                value="232"
+              />
+            </div>
+            <label for="risco" class="col-4 col-form-label">Risco</label>
+            <div class="col-8">
+              <input
+                type="text"
+                readonly
+                class="form-control-plaintext"
+                id="risco"
+                value="232"
               />
             </div>
           </div>
@@ -104,7 +136,26 @@
         const imc = (peso / altura ** 2).toFixed(2);
         const imcDom = document.getElementById('imc')
         imcDom.value = `${imc} kg/m²`
+
+        const [classificacao, risco] = getClassificacaoRisco(imc)
+
+        const classificacaoDom = document.getElementById('classificacao')
+        classificacaoDom.value = classificacao
+
+        const riscoDom = document.getElementById('risco')
+        riscoDom.value = risco
       });
+
+      function getClassificacaoRisco(imc) {
+        if (imc < 16) return ['Magreza Grau III']
+        if (imc < 16.9) return ['Magreza Grau II']
+        if (imc < 18.4) return ['Magreza Grau I']
+        if (imc < 24.9) return ['Eutrofia']
+        if (imc < 29.9) return ['Sobrepeso', 'Aumentado']
+        if (imc < 34.9) return ['Obesidade Grau I', 'Moderado']
+        if (imc < 40) return ['Obesidade Grau II', 'Grave']
+        return ['Obesidade Grau III', 'Muito grave']
+      }
     </script>
   </body>
 </html>
