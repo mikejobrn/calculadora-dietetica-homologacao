@@ -10,6 +10,13 @@
       integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
       crossorigin="anonymous"
     />
+    <style>
+      .btn-remocao {
+        margin: -0.5rem -1rem;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -62,7 +69,6 @@
               type="number"
               class="form-control"
               placeholder="Necessidade calórica por kg"
-              value="30"
             />
             <span class="input-group-text">kcal/kg</span>
           </div>
@@ -73,7 +79,6 @@
               type="number"
               class="form-control"
               placeholder="Necessidade protéica por kg"
-              value="1.5"
             />
             <span class="input-group-text">pt/kg</span>
           </div>
@@ -115,7 +120,7 @@
           <fieldset class="mt-4">
             <legend>Adicionar Etapa</legend>
             <div class="row">
-              <div class="mb-3">
+              <div class="col-8 mb-3">
                 <label for="horario">Horário</label>
                 <input
                   id="horario"
@@ -125,6 +130,20 @@
                   aria-label="Horário"
                   aria-describedby="basic-addon2"
                 />
+              </div>
+              <div class="col-4">
+                <label for="duracao-etapa">Duração</label>
+                <div class="input-group mb-3">
+                  <input
+                    id="duracao-etapa"
+                    type="number"
+                    class="form-control"
+                    placeholder="Duração"
+                    aria-label="Duração"
+                    aria-describedby="basic-addon2"
+                  />
+                  <span class="input-group-text" id="basic-addon2">h</span>
+                </div>
               </div>
             </div>
     
@@ -220,6 +239,11 @@
             Informações nutricionais
           </div>
           <div class="card-body">
+            <p class="card-text">
+              <b>Volume</b>: <span id="res-volume">750</span> ml
+              <b>Tempo</b>: <span id="res-tempo">21h</span> h
+              <b>BI média</b>: <span id="res-bi-media">36</span> ml/h
+            </p>
             <p class="card-text">
               <b>VCT</b>: <span id="res-vct">1086</span>
               <b>CHO</b>: <span id="res-cho">126</span>

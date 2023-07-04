@@ -81,6 +81,7 @@ document
 
     const etapa = new Etapa()
     etapa.horario = document.getElementById('horario').value
+    etapa.duracao = parseFloat(document.getElementById('duracao-etapa').value)
 
     const dietaSelecionadaNome = document.getElementById('dietas').value
     const dietaSelecionada = dietaSelecionadaNome !== '' ? dietas.find(dieta => dieta.nome === dietaSelecionadaNome) : undefined
@@ -92,16 +93,24 @@ document
     etapa.moduloProteina = moduloProteinaSelecionada
     etapa.moduloProteinaMedida = parseFloat(document.getElementById('medida-modulo-proteina').value)
 
-    dieta.etapas.push(etapa)
+    const moduloFibraSelecionadaNome = document.getElementById('modulo-fibra').value
+    const moduloFibraSelecionada = moduloFibraSelecionadaNome !== '' ? modulosFibra.find(mp => mp.nome === moduloFibraSelecionadaNome) : undefined
+    etapa.moduloFibra = moduloFibraSelecionada
+    etapa.moduloFibraMedida = parseFloat(document.getElementById('medida-modulo-fibra').value)
+
+    dieta.adicionarEtapa(etapa)
 
     document.getElementById('passo-4').className = ''
 
     // limpar
     document.getElementById('horario').value = ''
+    document.getElementById('duracao-etapa').value = ''
     document.getElementById('dietas').value = ''
     document.getElementById('volume-dieta').value = ''
     document.getElementById('modulo-proteina').value = ''
     document.getElementById('medida-modulo-proteina').value = ''
+    document.getElementById('modulo-fibra').value = ''
+    document.getElementById('medida-modulo-fibra').value = ''
 
     mostrarEtapas();
     atualizarResumo();
@@ -113,12 +122,25 @@ function mostrarEtapas() {
   dieta.etapas.forEach(etapa => {
     etapasDom.appendChild(etapa.convertToHtml())
   })
+
+  for (const botaoRemocaoEtapaDom of document.getElementsByClassName('btn-remocao')) {
+    botaoRemocaoEtapaDom.addEventListener('click', removerEtapa)
+  }
+}
+
+function removerEtapa(e) {
+  e.preventDefault()
+  dieta.removerEtapa(e.target.dataset.horario)
+  mostrarEtapas()
 }
 
 function atualizarResumo() {
   const necessidadeCalorica = parseFloat(document.querySelector('input[name="necessidade-calorica-por-peso"]:checked').value)
   const necessidadeProteica = parseFloat(document.querySelector('input[name="necessidade-proteica-por-peso"]:checked').value)
 
+  document.getElementById('res-volume').innerText = dieta.volume.toFixed(0)
+  document.getElementById('res-tempo').innerText = dieta.tempo.toFixed(0)
+  document.getElementById('res-bi-media').innerText = dieta.biMedia.toFixed(0)
   document.getElementById('res-vct').innerText = dieta.vct.toFixed(0)
   document.getElementById('res-cho').innerText = dieta.cho.toFixed(0)
   document.getElementById('res-ptn').innerText = dieta.ptn.toFixed(1)

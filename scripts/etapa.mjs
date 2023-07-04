@@ -1,6 +1,7 @@
 export class Etapa {
     id
     horario
+    duracao
     dieta
     dietaMedida
     moduloProteina
@@ -8,11 +9,14 @@ export class Etapa {
     moduloFibra
     moduloFibraMedida
 
+    get bi() {
+        return this.dietaMedida / this.duracao
+    }
+
     convertToHtml() {
         const cardDom = this.getCardDom()
 
         const cardHeaderDom = this.getCardHeaderDom()
-        cardHeaderDom.innerText = this.horario
 
         cardDom.appendChild(cardHeaderDom)
 
@@ -23,6 +27,11 @@ export class Etapa {
         if (this.moduloProteina) {
             const moduloProteinaLiDom = this.getLiDom(`${this.moduloProteina.nome} - ${this.moduloProteinaMedida} medida`)
             ulDom.appendChild(moduloProteinaLiDom)
+        }
+
+        if (this.moduloFibra) {
+            const moduloFibraLiDom = this.getLiDom(`${this.moduloFibra.nome} - ${this.moduloFibraMedida} medida`)
+            ulDom.appendChild(moduloFibraLiDom)
         }
 
         cardDom.appendChild(ulDom)
@@ -39,7 +48,20 @@ export class Etapa {
 
     getCardHeaderDom() {
         const cardHeaderDom = document.createElement('div')
-        cardHeaderDom.className = 'card-header'
+        cardHeaderDom.classList.add('card-header', 'd-flex', 'justify-content-between')
+
+        const textoDom = document.createElement('span')
+        textoDom.innerText = `${this.horario} - BI: ${this.bi.toFixed(0)} ml/h`
+
+        cardHeaderDom.appendChild(textoDom)
+
+        const botaoRemocao = document.createElement('button')
+        botaoRemocao.classList.add('btn', 'btn-sm', 'btn-danger', 'py-0', 'px-3', 'btn-remocao')
+        botaoRemocao.dataset.horario = this.horario
+        botaoRemocao.innerText = 'X'
+
+        cardHeaderDom.appendChild(botaoRemocao)
+
         return cardHeaderDom
     }
 

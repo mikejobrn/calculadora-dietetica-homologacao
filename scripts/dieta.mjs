@@ -7,6 +7,28 @@ export class Dieta {
         this.etapas = []
     }
 
+    get volume() {
+        return this.etapas.reduce((resultado, etapa) => {
+            if (etapa.dieta) {
+                return resultado + etapa.dietaMedida
+            }
+            return resultado
+        }, 0)
+    }
+    
+    get tempo() {
+        return this.etapas.reduce((resultado, etapa) => {
+            if (etapa.dieta) {
+                return resultado + etapa.duracao
+            }
+            return resultado
+        }, 0)
+    }
+
+    get biMedia() {
+        return this.volume / this.tempo
+    }
+
     get ptn() {
         return this.etapas.reduce((resultado, etapa) => {
             if (etapa.dieta) {
@@ -40,8 +62,8 @@ export class Dieta {
 
     get mf() {
         return this.etapas.reduce((resultado, etapa) => {
-            if (etapa.moduloFibras) {
-                return resultado + etapa.moduloFibras.qtd * etapa.moduloFibraMedida
+            if (etapa.moduloFibra) {
+                return resultado + etapa.moduloFibra.qtd * etapa.moduloFibraMedida
             }
             return resultado
         }, 0)
@@ -88,5 +110,15 @@ export class Dieta {
 
     adequacaoPtn(necessidadeProteica) {
         return this.totalProteinas / necessidadeProteica * 100
+    }
+
+    adicionarEtapa(etapa) {
+        this.etapas.push(etapa)
+        this.etapas.sort((etapaA, etapaB) => etapaA.horario.localeCompare(etapaB.horario))
+    }
+
+    removerEtapa(horario) {
+        this.etapas = this.etapas.filter(etapa => etapa.horario !== horario)
+        this.etapas.sort((etapaA, etapaB) => etapaA.horario - etapaB.horario)
     }
 }
