@@ -160,6 +160,7 @@ function atualizarResumo() {
 }
 
 function carregarSelectDietas() {
+  dietas.sort((dietaA, dietaB) => dietaA.nome.localeCompare(dietaB.nome))
   const dietasOptionsDom = dietas.map((dieta) => {
     const option = document.createElement('option');
     option.value = dieta.nome;
