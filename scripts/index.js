@@ -62,6 +62,7 @@ document
     necessidadeProteicaPorPesoIdeal = calcularNecessidadeProteica(pesoIdeal, necessidadeProteicaPorKg)
     necessidadeProteicaPorPesoEstimado = calcularNecessidadeProteica(pesoEstimado, necessidadeProteicaPorKg)
 
+    document.getElementById('peso-ideal').innerText = pesoIdeal.toFixed(1)
     document.getElementById('necessidade-calorica-peso-ideal').innerText = necessidadeCaloricaPorPesoIdeal.toFixed(0)
     document.getElementById('necessidade-calorica-por-peso-ideal').value = necessidadeCaloricaPorPesoIdeal
     document.getElementById('necessidade-calorica-peso-estimado').innerText = necessidadeCaloricaPorPesoEstimado.toFixed(0)
