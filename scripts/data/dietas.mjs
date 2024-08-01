@@ -182,4 +182,13 @@ export const dietas = [
         gorduras: 40,
         fibras: 0
     },
+    {
+        nome: 'PROTEIN PLUS ENERGY 1.5',
+        volume: 1000,
+        calorias: 1500,
+        carboidratos: 170,
+        proteinas: 75,
+        gorduras: 58,
+        fibras: 0
+    },
 ]
