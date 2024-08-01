@@ -5,6 +5,9 @@ import { modulosFibra } from './data/modulo-fibra.mjs'
 import { Dieta } from './dieta.mjs';
 import { Etapa } from './etapa.mjs';
 import { Paciente } from './paciente.mjs';
+import { estimarPesoChumleaEtAl1988 } from './utils/estimativa-peso.mjs';
+import { estimarAlturaChumleaEtAl1985 } from './utils/estimativa-altura.mjs';
+import { exibirAlerta } from './utils/exibir-alerta.mjs';
 
 let pesoEstimado
 let altura
@@ -23,6 +26,27 @@ window.addEventListener('load', () => {
   carregarSelectModulosProteina();
   carregarSelectModulosFibra();
 });
+
+document
+  .getElementById('calcular-estimativa')
+  .addEventListener('click', (e) => {
+    const sexo = document.getElementById('estimativa-homem').getAttribute('checked') ? 'homem' : 'mulher';
+    const raca = document.getElementById('estimativa-negro').getAttribute('checked') ? 'negro' : 'branco';
+    const idade = parseInt(document.getElementById('estimativa-idade').value);
+    const aj = parseFloat(document.getElementById('aj').value);
+    const cb = parseFloat(document.getElementById('cb').value);
+
+    try {
+      const pesoEstimado = estimarPesoChumleaEtAl1988({ sexo, raca, idade, aj, cb });
+      const alturaEstimada = estimarAlturaChumleaEtAl1985({ sexo, raca, idade, aj });
+  
+      document.getElementById('peso').value = pesoEstimado;
+      document.getElementById('altura').value = alturaEstimada;
+      document.getElementById('idade').value = idade;
+    } catch (erro) {
+      exibirAlerta(document.getElementById('alertas'), erro.message, 'danger');
+    }
+  });
 
 document
   .getElementById('calcular-imc')

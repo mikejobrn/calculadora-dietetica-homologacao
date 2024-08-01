@@ -22,6 +22,8 @@
     <div class="container">
       <h1 class="text-center my-4">Calculadora Dietética</h1>
 
+      <div id="alertas"></div>
+
       <form class="my-4">
         <div class="input-group mb-3">
           <input
@@ -52,7 +54,102 @@
         </div>
 
         <button id="calcular-imc" type="submit" class="btn btn-primary">Calcular</button>
+        <button
+          id="estimar-peso-altura"
+          type="button"
+          class="btn btn-outline-primary"
+          data-bs-toggle="modal"
+          data-bs-target="#modal-estimativa"
+        >
+          Estimar peso e altura
+        </button>
       </form>
+      
+
+      <div class="modal" id="modal-estimativa" tabindex="-1">
+        <div class="modal-dialog modal-fullscreen-sm-down">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Estimativa de peso e altura (Chumlea et al., 1988, 1985)</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label>Sexo</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="estimativa-sexo" id="estimativa-homem" checked>
+                    <label class="form-check-label" for="estimativa-homem">
+                      Homem
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="estimativa-sexo" id="estimativa-mulher">
+                    <label class="form-check-label" for="estimativa-mulher">
+                      Mulher
+                    </label>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label>Raça/Etnia</label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="estimativa-raca" id="estimativa-negro" checked>
+                    <label class="form-check-label" for="estimativa-negro">
+                      Negra
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="estimativa-raca" id="estimativa-branco">
+                    <label class="form-check-label" for="estimativa-branco">
+                      Branca
+                    </label>
+                  </div>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input
+                    id="estimativa-idade"
+                    type="number"
+                    class="form-control"
+                    placeholder="Idade"
+                  />
+                  <span class="input-group-text">anos</span>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input
+                    id="aj"
+                    type="number"
+                    class="form-control"
+                    placeholder="Altura do joelho"
+                  />
+                  <span class="input-group-text">cm</span>
+                </div>
+
+                <div class="input-group mb-3">
+                  <input
+                    id="cb"
+                    type="number"
+                    class="form-control"
+                    placeholder="Circunferência do braço"
+                  />
+                  <span class="input-group-text">cm</span>
+                </div>
+        
+                <button
+                  id="calcular-estimativa"
+                  type="button"
+                  class="btn btn-primary"
+                  data-bs-dismiss="modal"
+                >
+                  Estimar
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div id="passo-2" class="visually-hidden">
         <div class="card my-4">
