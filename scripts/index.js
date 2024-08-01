@@ -30,8 +30,8 @@ window.addEventListener('load', () => {
 document
   .getElementById('calcular-estimativa')
   .addEventListener('click', (e) => {
-    const sexo = document.getElementById('estimativa-homem').getAttribute('checked') ? 'homem' : 'mulher';
-    const raca = document.getElementById('estimativa-negro').getAttribute('checked') ? 'negro' : 'branco';
+    const sexo = document.getElementById('estimativa-homem').checked ? 'homem' : 'mulher';
+    const raca = document.getElementById('estimativa-negro').checked ? 'negro' : 'branco';
     const idade = parseInt(document.getElementById('estimativa-idade').value);
     const aj = parseFloat(document.getElementById('aj').value);
     const cb = parseFloat(document.getElementById('cb').value);
