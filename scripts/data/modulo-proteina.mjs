@@ -6,5 +6,9 @@ export const modulosProteina = [
     {
         nome: 'F. PROTEIN',
         qtd: 4.4
-    }
+    },
+    {
+        nome: 'EREMIX',
+        qtd: 9
+    },
 ]
