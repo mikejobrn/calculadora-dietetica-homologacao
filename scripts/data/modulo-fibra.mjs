@@ -6,5 +6,9 @@ export const modulosFibra = [
     {
         nome: 'MÓDULO DE FIBRA',
         qtd: 4.3
+    },
+    {
+        nome: 'EREMIX',
+        qtd: 2.6
     }
 ]
